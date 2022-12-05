@@ -11,5 +11,8 @@ for elf in elves:
     max_load = max(load, max_load)
 
 print(max_load)
+assert max_load == 72070
 
-print(sum(list(reversed(sorted(elves_load)))[:3]))
+top_max_load = sum(list(reversed(sorted(elves_load)))[:3])
+print(top_max_load)
+assert top_max_load == 211805
