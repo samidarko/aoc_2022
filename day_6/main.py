@@ -1,8 +1,10 @@
-def get_first_start(marker_size: int):
+def get_first_start(marker_size: int) -> int:
     buffer = open("input.txt").read().strip()
     for offset in range((len(buffer) - marker_size) + 1):
-        if len(set(buffer[offset:offset + marker_size])) == marker_size:
-            return offset + marker_size
+        limit = offset + marker_size
+        if len(set(buffer[offset:limit])) == marker_size:
+            return limit
+    return 0
 
 
 def get_first_start_of_packet():
