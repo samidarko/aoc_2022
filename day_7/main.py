@@ -93,24 +93,46 @@ def create_file_system() -> Directory:
     return fs
 
 
-def traversal(fs: Directory):
+def part_one(directory: Directory):
     total = 0
-    size = fs.get_size()
+    size = directory.get_size()
     if size <= 100000:
         total += size
-    for file_name in fs.ls():
-        file = fs[file_name]
+    for file_name in directory.ls():
+        file = directory[file_name]
         if file.is_directory():
-            total += traversal(file)
+            total += part_one(file)
 
     return total
 
 
+def part_two(directory: Directory, minimum: int):
+    result = 0
+    size = directory.get_size()
+    if size >= minimum:
+        result = size
+    for file_name in directory.ls():
+        file = directory[file_name]
+        if file.is_directory():
+            size = part_two(file, minimum)
+            if size >= minimum:
+                result = min(result, size)
+
+    return result
+
+
 def main():
     fs = create_file_system()
-    total = traversal(fs)
+    total = part_one(fs)
     assert total == 1583951
     print(total)
+
+    minimum_space_to_free = 30000000 - (70000000 - fs.get_size())
+
+    minimum_size_directory = part_two(fs, minimum_space_to_free)
+    assert minimum_size_directory == 214171
+
+    print(minimum_size_directory)
 
 
 if __name__ == "__main__":
