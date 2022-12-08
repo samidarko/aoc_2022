@@ -42,7 +42,7 @@ class Directory:
         raise KeyError(name)
 
     def mkdir(self, name) -> "Directory":
-        """create dire if not exists"""
+        """create dir if not exists"""
         for file in self.files:
             if file.name == name:
                 return file
