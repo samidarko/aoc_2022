@@ -1,4 +1,3 @@
-$ cd /
 $ ls
 149291 cgc.vzv
 dir cmcrzdt
