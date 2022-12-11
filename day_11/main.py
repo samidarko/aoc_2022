@@ -2,9 +2,6 @@ from typing import List
 from dataclasses import dataclass
 
 
-# instructions = [line.strip() for line in open("test_input.txt").readlines()]
-
-
 @dataclass
 class Monkey:
     items: List[int]
@@ -37,9 +34,9 @@ class Monkey:
         return inspected_items
 
 
-def get_monkeys(relief: int) -> List[Monkey]:
+def get_monkeys(filename: str, relief: int) -> List[Monkey]:
     monkeys = []
-    for notes in open("input.txt").read().split("\n\n"):
+    for notes in open(filename).read().split("\n\n"):
         lines = notes.split("\n")
         items = lines[1].replace("  Starting items: ", "").replace(",", "").split()
         items = [int(item) for item in items]
@@ -60,7 +57,7 @@ def get_monkeys(relief: int) -> List[Monkey]:
 
 
 def part_one():
-    monkeys = get_monkeys(3)
+    monkeys = get_monkeys("input.txt", 3)
     for _ in range(20):
         # round
         for sender_monkey in range(len(monkeys)):
@@ -71,8 +68,8 @@ def part_one():
 
 
 def part_two():
-    monkeys = get_monkeys(1)
-    for _ in range(10000):
+    monkeys = get_monkeys("test_input.txt", 1)
+    for i in range(1000):
         # round
         for sender_monkey in range(len(monkeys)):
             for receiver_monkey, inspected_item in monkeys[sender_monkey].inspect():
