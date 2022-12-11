@@ -3,7 +3,7 @@ import unittest
 from main import part_two
 
 
-class TestStringMethods(unittest.TestCase):
+class TestPartTwo(unittest.TestCase):
 
     def setUp(self):
         self.matrix = [
