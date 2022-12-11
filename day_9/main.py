@@ -65,11 +65,36 @@ def part_one(instructions) -> int:
     return len(tail_visited_position)
 
 
+def part_two(instructions) -> list:
+    knots = [Position(0, 0) for _ in range(10)]
+    all_visited_position = []
+
+    for instruction in instructions:
+        move, _steps = instruction.split()
+        steps = int(_steps)
+        while steps > 0:
+            knots[0] = move_position(knots[0], move)
+            for index in range(9):
+                knots[index + 1] = update_tail(knots[index], knots[index + 1], move)
+            # tail_visited_position.add(knots[9])
+            steps -= 1
+            all_visited_position.append(knots[9])
+        print(instruction)
+        print(knots)
+
+    # print(tail_visited_position)
+    # return len(tail_visited_position)
+    return all_visited_position
+
+
 def main():
     instructions = [line.strip() for line in open("input.txt").readlines()]
     total_visited_position = part_one(instructions)
     assert total_visited_position == 6284
     print(total_visited_position)
+    total_visited_position = part_two(instructions)
+    # assert total_visited_position == 6284
+    print(len(set(total_visited_position)))
 
 
 if __name__ == "__main__":
