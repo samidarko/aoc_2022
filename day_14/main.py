@@ -1,6 +1,16 @@
 from typing import List
 from math import inf
 from collections import namedtuple
+from dataclasses import dataclass
+
+
+@dataclass
+class Shape:
+    min_x: int
+    min_y: int
+    max_x: int
+    max_y: int
+
 
 Position = namedtuple("Position", "x y")
 
@@ -10,7 +20,7 @@ def to_position(position: str) -> Position:
     return Position(int(x), int(y))
 
 
-def get_data() -> List[List[Position]]:
+def get_data() -> (Position, Shape):
     lines = [line.strip() for line in open("input.txt").readlines()]
 
     rocks = []
@@ -26,7 +36,7 @@ def get_data() -> List[List[Position]]:
             rock.append(position)
         rocks.append(rock)
     print(min_x, min_y, max_x, max_y)
-    return rocks
+    return rocks, Shape(min_x, min_y, max_x, max_y)
 
 
 def part_one():
